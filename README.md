@@ -4,3 +4,4 @@ The following program was created in C# and solves the rat-n-maze problem using 
 
 All that is needed to run the program is to download the files and execute the program in a Microsoft Visual Studio IDE or similar IDEs that can execute C# code.   
 
+# Projects
