@@ -8,7 +8,7 @@ All that is needed to run the program is to download the files and execute the p
 
 ## Knights Tour Solver Program
 
-The following program was created in C# and attempts to solve the knights tour problem for both closed and open tours. Using recursion, backtracking, and Warnsdorffs Rule (the knight should always move to an unvisited adjacent square that has the fewest possible onward moves) a solution is not always found, depending on the size of the board. In addition to Warnsdorffs Rule a combination of tie-breakers are uitilized to sort moves based on other objectives. Such as, edge, corner, and euclidean distance. The size of board can range from 5*5(25) to 20*20(400).
+The following program was created in C# and attempts to solve the knights tour problem for both closed and open tours. Using recursion, backtracking, and Warnsdorffs Rule (the knight should always move to an unvisited adjacent square that has the fewest possible onward moves) a solution is not always found, depending on the size of the board. In addition to Warnsdorffs Rule a combination of tie-breakers are uitilized to sort moves based on other objectives. Such as, edge, corner, and euclidean distance. The size of board can range from 5x5 (25 squares) to 20x20 (400 squares).
 
 Board Sizes: 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20
 
@@ -20,7 +20,7 @@ Tie-Breaker 3: Sort by distance (euclidean distance) from the center of the boar
 
 ### Test Results of KnightTour Algorithm: 
 
-Percentage of Open Tours solved: 8.31%<br>
+Percentage of Open Tours solved: 80.31%<br>
 Even Sizes: 99%<br>
 Odd Sizes : 50.58%<br> 
 
