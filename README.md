@@ -36,10 +36,10 @@ The logistic regression model in the program is utilized solve a classification 
 
 ### Data of the Logistic Model
 
-File: Fractures.xls
-Columns: ID, age, sex, fracture, weight_kg, height_cm, medication, waiting_time, bmd.
-Data Entries: 170 
-Columns Used for Logsitic Model Training: age, sex, fracture, weight_kg, height_cm
+File: Fractures.xls<br>
+Columns: ID, age, sex, fracture, weight_kg, height_cm, medication, waiting_time, bmd<br>
+Data Entries: 170<br> 
+Columns Used for Logsitic Model Training: age, sex, fracture, weight_kg, height_cm<br>
 
 ### Steps to Running Logistic Model GUI Model:
 
