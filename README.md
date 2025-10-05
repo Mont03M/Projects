@@ -28,3 +28,23 @@ Percentage of Closed Tours Solved: 0.98%<br>
 Even Sizes: 0.98%<br>
 Odd Sizes: 0%<br>
 
+## Logistic Model - Predicting Fractures Based on Bone Mineral Density (BMD)
+
+The program is created in Python and uitilzies a gui interface to accept inputs from a user to determine the likeiy hood of facture risks on patients based on age, sex, weight_kg, height_cm, and bone mineral density (BMD). Once inputs are entered the data is feed to a logistic model to generate predictions. Where age 1 < age 2, M or F, weight_kg = 0.00, height = 0.00, BMD = 0.00. The results show facture risks on patients from age 1 to age 2 and is higly dependent on BMD inputs.  
+
+The logistic regression model in the program is utilized solve a classification problem. As logistic regression models are excellent at solving binary classification tasks. Essentially, the classification problem was based on whether a patient was likely to get a fracture based on several predictors involving age, sex, weight, height, and bmd, and using the values of fractures as target values. In addition, several metrics were utilized to evaluate the performance of the logistic model and ensure its effectiveness and accuracy when performing predictions.
+
+### Data of the Logistic Model
+
+File: Fractures.xls
+Columns: ID, age, sex, fracture, weight_kg, height_cm, medication, waiting_time, bmd.
+Data Entries: 170 
+Columns Used for Logsitic Model Training: age, sex, fracture, weight_kg, height_cm
+
+### Steps to Running Logistic Model GUI Model:
+
+1. Create a python env (optional) - python -m env [env name] <br>
+2. From a an activated env - pip install -r requirements.txt or from a Kernel inside a python IDE - !pip install -r requirements.txt or %pip install -r requirements.txt<br>
+3. Make sure the requirements.txt is installing to the correct environment used by the Kernel <br>
+4. Make sure the requirements.txt is in the same directory as the model.py and model_results.py files <br>
+
