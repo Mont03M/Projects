@@ -1,50 +1,191 @@
-# Projects
+# C# Projects
 
 ## Rat-N-Maze Program
 
-The following program was created in C# and solves the rat-n-maze problem using recursion to improve its search to navigate an 8x8 maze. The maze is hard coded, future versions of the project will contain methods to randomized the construction of a maze. So, that on each iteration the maze will be generated differently, highlighting the capabilities of the algorithms in finding the end of the maze.
+This program is written in C# and solves the classic Rat-in-a-Maze problem using recursion to efficiently navigate an 8×8 maze. The maze is currently hardcoded, but future versions will include functionality to generate randomized mazes. This will allow each execution to produce a unique maze, better demonstrating the algorithm’s ability to find a path to the destination under varying conditions.
 
-All that is needed to run the program is to download the files and execute the program in a Microsoft Visual Studio IDE or similar IDEs that can execute C# code.   
+To run the program, simply download the project files and execute them using an IDE such as Microsoft Visual Studio or any other environment that supports C#.
+
+### Docker Setup
+
+#### Docker file
+
+The project includes a dockerfile to simplify setup.
+
+##### Commands
+
+Build --> docker build -t {tag name} . (e.g., docker build -t knights-tour:lastest)<br>
+Run --> docker run -it {image name} . (e.g., docker run -it knights-tour)<br>
+
+The Docker container for the Knight’s Tour program must be run in an interactive terminal using the -it flag<br>
 
 ## Knights Tour Solver Program
 
-The following program was created in C# and attempts to solve the knights tour problem for both closed and open tours. Using recursion, backtracking, and Warnsdorffs Rule (the knight should always move to an unvisited adjacent square that has the fewest possible onward moves) a solution is not always found, depending on the size of the board. In addition to Warnsdorffs Rule a combination of tie-breakers are uitilized to sort moves based on other objectives. Such as, edge, corner, and euclidean distance. The size of board can range from 5x5 (25 squares) to 20x20 (400 squares).
+The following program is written in C# and attempts to solve the Knight’s Tour problem for both closed and open tours. It uses recursion, backtracking, and Warnsdorff’s Rule (the knight should always move to an unvisited adjacent square with the fewest possible onward moves). A solution is not always guaranteed, depending on the size of the board.
 
-Board Sizes: 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20
+In addition to Warnsdorff’s Rule, a combination of tie-breakers is utilized to further prioritize moves based on additional criteria such as edge proximity, corner proximity, and Euclidean distance.
 
-After sorting moves with the fewest onward moves and a tie with onward moves occurs.
+The board size can range from 5×5 (25 squares) to 20×20 (400 squares).
 
-Tie-Breaker 1: Sort by edge distance - select and place moves closest to the edge of the board in the front of the list. A tie occurs then sort by tie-breaker 2<br>
-Tie-Breaker 2: Sort by corner distance - select and place moves closet to the corner of the board in the front of the list. A tie occurs then sort by tie-breaker 3<br>
-Tie-Breaker 3: Sort by distance (euclidean distance) from the center of the board - select and place the move closest to the center of the board in the front of the list<br> 
+### Board Sizes
 
-### Test Results of KnightTour Algorithm: 
+5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20<br>
+
+### Move Selection Strategy
+
+After sorting moves by the fewest onward moves, ties may occur.
+
+#### Tie-breaker 1: Edge Distance
+
+Sort moves by their distance to the edge of the board. Moves closest to the edge are placed at the front of the list.
+If a tie still exists, proceed to Tie-Breaker 2.
+
+#### Tie-breaker 2: Corner Distance
+
+Sort moves by their distance to the corners of the board. Moves closest to a corner are placed at the front of the list.
+If a tie still exists, proceed to Tie-Breaker 3.
+
+#### Tie-breaker 3: Distance from Center (Euclidean Distance)
+
+Sort moves by their Euclidean distance from the center of the board. Moves closest to the center are placed at the front of the list.
+
+### Test Results of KnightTour Algorithm:
 
 Percentage of Open Tours solved: 80.31%<br>
 Even Sizes: 99%<br>
-Odd Sizes : 50.58%<br> 
+Odd Sizes : 50.58%<br>
 
 Percentage of Closed Tours Solved: 0.98%<br>
 Even Sizes: 0.98%<br>
 Odd Sizes: 0%<br>
 
+### Docker Setup
+
+#### Docker file
+
+The project includes a dockerfile to simplify setup.
+
+##### Commands
+
+Build --> docker build -t {tag name} . (e.g., docker build -t rat-n-maze:lastest)<br>
+Run --> docker run -it {image name} . (e.g., docker run -it rat-n-maze)<br>
+
+The Docker container for the Rat-N-Maze program must be run in an interactive terminal using the -it flag<br>
+
+# MERN Projects
+
+## Todo App
+
+The Todo App is built using the MERN stack (MongoDB, Express.js, React.js, Node.js), providing a scalable architecture that can grow with additional features, modules, routes, and data.
+
+The frontend is developed with React.js and offers a robust interface for viewing, editing, creating, and deleting todos. It includes filtering options to sort todos efficiently and a search bar to find todos based on keywords.
+
+The backend follows the MRC (Model, Route, Controller) pattern to facilitate scalability and optimize query performance. It is built using Node.js and Express.js, and is supported by a MongoDB database.
+
+### Features
+
+#### Filter
+
+##### Parametters:
+
+Status: Completed, Pending<br>
+Priority: High, Medium, Low<br>
+Due Date: Date object<br>
+
+##### Description:
+
+The filter provides a simple and efficient way to retrieve todos based on specific parameters. It supports using one to three parameters simultaneously and applies them as an AND filter.
+
+#### Filter Badges:
+
+##### Description:
+
+The filter provides a simple and efficient way to retrieve todos based on specific parameters. It supports using one to three parameters simultaneously and applies them as an AND filter.
+
+#### Search:
+
+##### Keywords -> Values:
+
+Name: text<br>
+Description: text<br>
+Status: Completed, Pending<br>
+Priority: High, Medium, Low<br>
+Due Date: YYYY-MM-DD<br>
+
+##### Description:
+
+The search bar dynamically updates the UI based on entered keywords, displaying only matching todos. When filters are active, search results are limited to the filtered dataset.
+
+#### Create:
+
+Allows users to create a new todo.
+
+##### Fields include:
+
+Task Name<br>
+Due Date<br>
+Status<br>
+Priority<br>
+Description<br>
+
+#### Edit:
+
+Allows users to modify an existing todo.
+
+##### Fields include:
+
+Task Name<br>
+Due Date<br>
+Status<br>
+Priority<br>
+Description<br>
+
+#### View:
+
+Allows users to view an existing todo in read-only mode, with all fields disabled to prevent editing.
+
+#### Valdiation:
+
+Both Create and Edit functionalities include form validation to ensure all required fields are properly filled before submission.
+
+#### Docker Setup
+
+##### Docker Compose
+
+The project includes a docker-compose.yml file to integrate the frontend and backend services and simplify setup.
+
+##### Commands
+
+Build & Run --> docker compose up --build<br>
+Run --> docker compose up<br>
+
+# Python Projects
+
 ## Logistic Model - Predicting Fractures Based on Bone Mineral Density (BMD)
 
-The program is created in Python and uitilzies a gui interface to accept inputs from a user to determine the likeiy hood of facture risks on patients based on age, sex, weight_kg, height_cm, and bone mineral density (BMD). Once inputs are entered the data is feed to a logistic model to generate predictions. Where age 1 < age 2, M or F, weight_kg = 0.00, height = 0.00, BMD = 0.00. The results show facture risks on patients from age 1 to age 2 and is higly dependent on BMD inputs.  
+This program is written in Python and utilizes a GUI interface to accept user inputs and estimate the likelihood of fracture risk in patients. Predictions are based on age, sex, weight (kg), height (cm), and bone mineral density (BMD).
 
-The logistic regression model in the program is utilized solve a classification problem. As logistic regression models are excellent at solving binary classification tasks. Essentially, the classification problem was based on whether a patient was likely to get a fracture based on several predictors involving age, sex, weight, height, and bmd, and using the values of fractures as target values. In addition, several metrics were utilized to evaluate the performance of the logistic model and ensure its effectiveness and accuracy when performing predictions.
+Once the inputs are entered, the data is fed into a logistic regression model to generate predictions. The model evaluates fracture risk across a specified age range (age 1 < age 2) and is highly dependent on BMD values.
 
-### Data of the Logistic Model
+### Model Overview
+
+The logistic regression model is used to solve a binary classification problem. Logistic regression is well-suited for classification tasks where the outcome is categorical.
+
+In this case, the model predicts whether a patient is likely to experience a fracture based on several predictors, including age, sex, weight, height, and BMD. The target variable is the presence or absence of a fracture.
+
+Additionally, multiple evaluation metrics are used to assess the model’s performance and ensure accuracy and reliability in predictions.
+
+### Dataset Information
 
 File: Fractures.xls<br>
 Columns: ID, age, sex, fracture, weight_kg, height_cm, medication, waiting_time, bmd<br>
-Data Entries: 170<br> 
-Columns Used for Logsitic Model Training: age, sex, fracture, weight_kg, height_cm<br>
+Total Entries: 170<br>
 
-### Steps to Running Logistic Model GUI Model:
+### Steps to Running Logistic Model GUI:
 
-1. Create a python env (optional) - python -m env [env name] <br>
-2. From a an activated env - pip install -r requirements.txt or from a Kernel inside a python IDE - !pip install -r requirements.txt or %pip install -r requirements.txt<br>
-3. Make sure the requirements.txt is installing to the correct environment used by the Kernel <br>
-4. Make sure the requirements.txt is in the same directory as the model.py and model_results.py files <br>
-
+1. Create a python virtual environment (optional): python -m venv <env_name> <br>
+2. Activate the environment: pip install -r requirements.txt<br>
+   Alternatively, in a Python IDE or notebook: !pip install -r requirements.txt<br>
+   Or: %pip install -r requirements.txt<br>
+3. Ensure requirements.txt is installed in the correct environment used by your IDE or kernel. <br>
+4. Make sure requirements.txt, model.py, and model_results.py are in the same directory. <br>
