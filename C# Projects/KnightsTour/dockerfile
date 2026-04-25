@@ -1,0 +1,19 @@
+FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
+WORKDIR /src
+
+# Copy everything INCLUDING subfolder
+COPY . .
+
+# Go into the real project folder
+WORKDIR /src/KnightsTour
+
+# Restore + publish using correct path
+RUN dotnet restore KnightsTour.csproj
+RUN dotnet publish -c Release -o /app/publish --no-restore
+
+FROM mcr.microsoft.com/dotnet/runtime:9.0
+WORKDIR /app
+
+COPY --from=build /app/publish .
+
+ENTRYPOINT ["dotnet", "KnightsTour.dll"]
