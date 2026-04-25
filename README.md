@@ -14,10 +14,10 @@ The project includes a dockerfile to simplify setup.
 
 ##### Commands
 
-Build --> docker build -t {tag name} . (e.g., docker build -t knights-tour:lastest)<br>
-Run --> docker run -it {image name} . (e.g., docker run -it knights-tour)<br>
+Build --> docker build -t {tag name} . (e.g., docker build -t rat-n-maze:latest)<br>
+Run --> docker run -it {image name} . (e.g., docker run -it rat-n-maze)<br>
 
-The Docker container for the Knight’s Tour program must be run in an interactive terminal using the -it flag<br>
+The Docker container for the Rat-N-Maze program must be run in an interactive terminal using the -it flag<br>
 
 ## Knights Tour Solver Program
 
@@ -67,10 +67,10 @@ The project includes a dockerfile to simplify setup.
 
 ##### Commands
 
-Build --> docker build -t {tag name} . (e.g., docker build -t rat-n-maze:lastest)<br>
-Run --> docker run -it {image name} . (e.g., docker run -it rat-n-maze)<br>
+Build --> docker build -t {tag name} . (e.g., docker build -t knights-tour:latest)<br>
+Run --> docker run -it {image name} . (e.g., docker run -it knights-tour)<br>
 
-The Docker container for the Rat-N-Maze program must be run in an interactive terminal using the -it flag<br>
+The Docker container for the Knight’s Tour program must be run in an interactive terminal using the -it flag<br>
 
 # MERN Projects
 
