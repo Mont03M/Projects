@@ -1,0 +1,58 @@
+## Build results
+bin/
+obj/
+out/
+publish/
+
+## User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+## VS Code / Visual Studio
+.vs/
+.vscode/
+
+## Logs
+*.log
+logs/
+
+## Dotnet artifacts
+*.dll
+*.exe
+*.pdb
+*.cache
+*.ilk
+*.nupkg
+*.snupkg
+
+## Configuration secrets
+appsettings.Development.json
+secrets.json
+*.key
+*.pfx
+
+## EF Core migrations (optional: remove if you want to track them)
+Migrations/
+
+## Docker (optional local overrides)
+docker-compose.override.yml
+
+## OS files
+.DS_Store
+Thumbs.db
+
+## Node (if backend accidentally includes frontend tools)
+node_modules/
+
+## Test results
+TestResults/
+*.trx
+
+## Rider / JetBrains
+.idea/
+
+## Coverage reports
+coverage/
+*.coverage
