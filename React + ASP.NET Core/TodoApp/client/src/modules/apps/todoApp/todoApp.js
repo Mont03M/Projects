@@ -59,7 +59,7 @@ export function TodoApp() {
   } = useFieldArray({ control, name: "todos" });
 
   const handleFilterTodo = (filter) => {
-    // filter object
+    // filter object - check if filter contains any values
     const filterObject = Object.entries(filter || {})
       .filter(([_, value]) => value && `${value}`.trim() !== "")
       .map(([key, value]) => ({ key, value }));

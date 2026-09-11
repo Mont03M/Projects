@@ -1,0 +1,50 @@
+﻿<UserControl x:Class="ChessGame.Views.GameOptions"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ChessGame.Views"
+             xmlns:radioButton="clr-namespace:ChessGame.Utilities"
+             xmlns:converter="clr-namespace:ChessGame.Converters"
+             mc:Ignorable="d"
+             MinHeight="1000" MinWidth="1500">
+    <!-- converter to strings -->
+    <UserControl.Resources>
+        <converter:ConvertToString x:Key="converterString"/>
+        <converter:ConvertToBool x:Key="converterBool" />
+        <converter:ConvertToChessPieceColor x:Key="converterChessColor"/>
+    </UserControl.Resources>
+    <Grid>
+        <Grid Grid.ColumnSpan="1">
+
+            <!-- background -->
+            <Grid.Background>
+                <ImageBrush ImageSource="/assets/displayElements/background_2.jpg" Stretch="UniformToFill"/>
+            </Grid.Background>
+            <!-- level options-->
+            <UniformGrid Columns="3" Rows="1" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="150,20,0,20">
+                <RadioButton Tag="Easy" Content="/assets/displayElements/pawn.jpg" Style="{StaticResource radioGroup}" BorderBrush="White" Height="250" Width="200" Margin="0,20,30,0" IsChecked="{Binding SelectedLevel, Converter={StaticResource converterString}, ConverterParameter=Easy, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <RadioButton Tag="Medium" Content="/assets/displayElements/knight.jpg" Style="{StaticResource radioGroup}" BorderBrush="White" Height="250" Width="200" Margin="0,20,30,0" IsChecked="{Binding SelectedLevel, Converter={StaticResource converterString}, ConverterParameter=Meduim, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <RadioButton Tag="Hard" Content="/assets/displayElements/queen.jpg" Style="{StaticResource radioGroup}" BorderBrush="White" Height="250" Width="200" Margin="0,20,30,0" IsChecked="{Binding SelectedLevel, Converter={StaticResource converterString}, ConverterParameter=Hard, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            </UniformGrid>
+            <!-- Player Color-->
+            <UniformGrid Columns="2" Rows="1" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,20,150,0">
+                <RadioButton Tag="White" Content="/assets/displayElements/chessPieces_white.jpg" Style="{StaticResource radioGroup}" BorderBrush="White" Background="DimGray" Height="250" Width="200" Margin="0,20,30,0" IsChecked="{Binding PlayerColor, Converter={StaticResource converterChessColor}, ConverterParameter=white, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <RadioButton Tag="Black" Content="/assets/displayElements/chessPieces_black.jpg" Style="{StaticResource radioGroup}" BorderBrush="White" Background="DimGray" Height="250" Width="200" Margin="0,20,30,0" IsChecked="{Binding PlayerColor, Converter={StaticResource converterChessColor}, ConverterParameter=black, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            </UniformGrid>
+            <!-- Game Modes -->
+            <UniformGrid Columns="2" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,500,300">
+                <RadioButton Tag="Player vs AI" Content="/assets/displayElements/player_vs_ai.jpg" Style="{StaticResource radioGroup}" BorderBrush="White" Height="250" Width="200" Margin="0,30,30,0" IsChecked="{Binding SelectedMode, Converter={StaticResource converterString}, ConverterParameter=Player-AI, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <RadioButton Tag="AI vs AI" Content="/assets/displayElements/ai_vs_ai.jpg" Style="{StaticResource radioGroup}" BorderBrush="White" Height="250" Width="200" Margin="0,30,30,0" IsChecked="{Binding SelectedMode, Converter={StaticResource converterString}, ConverterParameter=AI-AI, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            </UniformGrid>
+            <UniformGrid Columns="1" Rows="1" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,20,290,300">
+                <radioButton:ToggleabeRadioButton Tag="Lighting Chess" Content="/assets/displayElements/clock.jpg" Style="{StaticResource radioGroup}" IsEnabled="{Binding IsLightingChessEnabled}" BorderBrush="White" Height="250" Width="200" Margin="0,30,30,0" IsChecked="{Binding IsLightingChess, Converter={StaticResource converterBool}, ConverterParameter=true, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            </UniformGrid>
+            <!-- Buttons -->
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,70">
+                <Button Content="Start Match" Style="{StaticResource circleButton}" Height="70" Width="250" Margin="0,0,50,0" Command="{Binding mainView.mainViewModel.NavigateToGameBoardCommand}"/>
+                <Button Content="Cancel" Style="{StaticResource circleButton}" Height="70" Width="250" Margin="0,0,0,0" Command="{Binding mainView.mainViewModel.NavigateHomeUICommand}"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>

@@ -1,0 +1,231 @@
+﻿<UserControl x:Class="ChessGame.Views.Settings"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ChessGame.Views"
+             xmlns:vm="clr-namespace:ChessGame.ViewModels"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:converter="clr-namespace:ChessGame.Converters"
+             mc:Ignorable="d" 
+             MinWidth="1500" MinHeight="1000"
+             Background="CornflowerBlue">
+    <!-- converter to strings -->
+    <UserControl.Resources>
+        <converter:ConvertToString x:Key="converterString"/>
+    </UserControl.Resources>
+
+    <materialDesign:DialogHost CloseOnClickAway="False" Identifier="RootDialog">
+        
+        <Grid>
+        <Grid.Background>
+           <ImageBrush ImageSource="/assets/displayElements/background4.jpg" Stretch="UniformToFill"/>
+        </Grid.Background>
+
+        <Border BorderBrush="Black" Background="LightGray" BorderThickness="1" Grid.Column="2" HorizontalAlignment="Center" CornerRadius="10" Style="{StaticResource transparentBackground}"/>
+
+        <Grid Height="900" Width="1300" VerticalAlignment="Center" HorizontalAlignment="Center">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="450"/>
+                <RowDefinition Height="300"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="400" />
+                <ColumnDefinition Width="400"/>
+                <ColumnDefinition Width="auto" />
+            </Grid.ColumnDefinitions>
+
+            <!--==================================== Row 1 ===================================-->
+
+            <!-- chess board odd square color -->
+            <TextBlock Text="Odd Square Color" Grid.Row="0" Grid.Column="0" VerticalAlignment="Top" Margin="30,40,0,0" Style="{StaticResource settingsFont}"/>
+            <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0">
+                <ComboBox x:Name="oddSquareColor" HorizontalAlignment="Left" VerticalAlignment="Top"
+                     ItemsSource="{Binding MediaColors, Mode=OneWay}" 
+                     DisplayMemberPath="Name"
+                     SelectedValue="{Binding SelectedOddSquareColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                     SelectedIndex="{Binding SelectedOddColorIndex}"
+                     Width="150" Height="35"
+                     Margin="45,80,0,0" Grid.Row="0" Grid.Column="0"
+                     Style="{DynamicResource ComboBoxStyle1}"/>
+                <Border Background="{Binding OddSquareColor}" Height="150" Width="150" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,40,0,0"/>
+            </StackPanel>
+
+            <!-- available moves indicator -->
+            <TextBlock Text="Moves Indicator" Grid.Row="0" Grid.Column="0" VerticalAlignment="Bottom" Margin="30,40,50,150" Style="{StaticResource settingsFont}"/>
+            <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0" VerticalAlignment="Bottom">
+                <ComboBox x:Name="availableMoves" HorizontalAlignment="Left"
+                         ItemsSource="{Binding MediaColors, Mode=OneWay}" 
+                         DisplayMemberPath="Name"
+                         SelectedValue="{Binding SelectedAvailableMovesColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                         SelectedIndex="{Binding SelectedAvailableColorIndex}"
+                         Width="150" Height="35"
+                         Margin="45,80,0,100" Grid.Row="0" Grid.Column="0"
+                         Style="{DynamicResource ComboBoxStyle1}"/>
+                <Border Background="{Binding AvailbleMovesIndicatorColor}" Height="150" Width="150" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,40,0,0"/>
+            </StackPanel>
+
+            <!-- Chess Board even square color-->
+            <TextBlock Text="Even Square Color" Grid.Row="0" Grid.Column="1" VerticalAlignment="Top" Margin="30,40,0,0" Style="{StaticResource settingsFont}"/>
+            <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1">
+                <ComboBox x:Name="evenSquareColor" HorizontalAlignment="Left" VerticalAlignment="Top"
+                          ItemsSource="{Binding MediaColors, Mode=OneWay}" 
+                          DisplayMemberPath="Name"
+                          SelectedValue="{Binding SelectedEvenSquareColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                          SelectedIndex="{Binding SelectedEvenColorIndex}"
+                          Width="150" Height="35"
+                          Margin="45,80,0,0" Grid.Row="0" Grid.Column="1"
+                          Style="{DynamicResource ComboBoxStyle1}"/>
+                <Border Background="{Binding EvenSquareColor}" Height="150" Width="150" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="30,40,0,0"/>
+            </StackPanel>
+
+                <!-- Attack indicator -->
+            <TextBlock Text="Attack Indicator" Grid.Row="0" Grid.Column="1" VerticalAlignment="Bottom" Margin="30,40,0,150" Style="{StaticResource settingsFont}"/>
+            <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1" VerticalAlignment="Bottom">
+                <ComboBox x:Name="attackMoves" HorizontalAlignment="Left"
+                          ItemsSource="{Binding MediaColors, Mode=OneWay}"
+                          DisplayMemberPath="Name"
+                          SelectedValue="{Binding SelectedAttackMovesColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                          SelectedIndex="{Binding SelectedAttackColorIndex}"
+                          Width="150" Height="35"
+                          Margin="45,80,0,100" Grid.Row="0" Grid.Column="0"
+                          Style="{DynamicResource ComboBoxStyle1}"/>
+                <Border Background="{Binding AttackMovesIndicatorColor}" Height="150" Width="150" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,40,0,0"/>
+            </StackPanel>
+
+                <StackPanel Height="400" Width="400" Grid.Row="0" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="57,0,0,0">
+                    <Grid Margin="0,15,0,50" VerticalAlignment="Top" HorizontalAlignment="Center" Height="50" Width="350" Background="Transparent" >
+                        <CheckBox x:Name="developmentModeCB" Grid.Row="1" Margin="26,0,0,0" 
+                       Width="300"
+                       Content="{Binding CheckBoxSoundEffectsTxt}"
+                       IsChecked="{Binding IsSoundEffectEnabled}" 
+                       IsThreeState="False"
+                       FontSize="15"
+                       Foreground="Gold"
+                       Background="Black"
+                       Style="{StaticResource MaterialDesignFilterChipCheckBox}"/>
+                    </Grid>
+
+                    <Grid HorizontalAlignment="Center">
+                        <Grid.RowDefinitions>
+                            <!-- File labels -->
+                            <RowDefinition Height="20"/>
+
+                            <!-- Chess board -->
+                            <RowDefinition Height="240"/>
+
+                            <!-- Optional bottom labels -->
+                            <RowDefinition Height="20"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <!-- Rank labels -->
+                            <ColumnDefinition Width="20"/>
+
+                            <!-- Chess board -->
+                            <ColumnDefinition Width="240"/>
+
+                            <!-- Optional right labels -->
+                            <ColumnDefinition Width="20"/>
+                        </Grid.ColumnDefinitions>
+
+
+                        <!-- FILES: A B C D E F G H -->
+                        <ItemsControl Grid.Row="0" Grid.Column="1" ItemsSource="{Binding Files}">
+
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <UniformGrid Columns="8"/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Foreground="Silver" Text="{Binding}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+
+                        </ItemsControl>
+
+
+                        <!-- RANKS: 8 7 6 5 4 3 2 1 -->
+                        <ItemsControl Grid.Row="1" Grid.Column="0" ItemsSource="{Binding Ranks}">
+
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <UniformGrid Rows="8"/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Foreground="Silver" Text="{Binding}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+
+                        </ItemsControl>
+
+
+                        <!-- Chess set selected -->
+                        <ItemsControl x:Name="settingsBoard" ItemsSource="{Binding SettingsChessBoard.ChessSquares_, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" BorderBrush="BlanchedAlmond" BorderThickness="2" Grid.Row="1" Grid.Column="1" Height="240" Width="240" >
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <UniformGrid Columns="8" Rows="8"/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Background="{Binding Color_, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                                        <Image Source="/assets/displayElements/wood_texture.jpg" Stretch="Fill" Opacity="0.20" IsHitTestVisible="False"/>
+                                        <Image Source="{Binding ChessPiece_.PieceImage}" Stretch="Uniform" Height="20" Width="20"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </Grid>
+             </StackPanel>
+                <!-- Underline -->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="1200" Grid.ColumnSpan="3" >
+                <Border Style="{StaticResource underline}" Margin="60,0,0,0"  Width="1200" HorizontalAlignment="Center"/>
+            </StackPanel>
+           
+            <!--==================================== Row 2 ===================================-->
+           
+                <!-- Chess Set selection -->
+            <UniformGrid Columns="3" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="80,0,0,0" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2">
+                <RadioButton Tag="Chess Set 1" Content="/assets/displayElements/ChessPieces2.jpg" Style="{StaticResource radioGroup}" BorderBrush="White" Height="250" Width="200" Margin="0,0,40,0" IsChecked="{Binding SelectedChessSet, Converter={StaticResource converterString}, ConverterParameter=set1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <RadioButton Tag="Chess Set 2" Content="/assets/displayElements/ChessPieces.jpg" Style="{StaticResource radioGroup}" BorderBrush="White" Height="250" Width="200" Margin="0,0,30,0"  IsChecked="{Binding SelectedChessSet, Converter={StaticResource converterString}, ConverterParameter=set2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <RadioButton Tag="Chess Set 3" Content="/assets/displayElements/ChessPieces3.jpg" Style="{StaticResource radioGroup}" BorderBrush="White" Height="250" Width="200" Margin="0,0,30,0"  IsChecked="{Binding SelectedChessSet, Converter={StaticResource converterString}, ConverterParameter=set3, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            </UniformGrid>
+            
+            <!-- chess pieces preview -->
+                <ItemsControl ItemsSource="{Binding ChessPreviewPieces, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Height="200" Width="350" Margin="450,0,0,0" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <UniformGrid Columns="6" Rows="2"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border Background="Transparent" Margin="1,0,0,0">
+                                <Image Source="{Binding}" Stretch="Uniform" Height="55" Width="50" Margin="0,0,0,0"/>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                <!-- Underline -->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="1200" Grid.ColumnSpan="3" Grid.Row="1" >
+                <Border Style="{StaticResource underline}" Margin="60,0,0,0"  Width="1200" HorizontalAlignment="Center"/>
+            </StackPanel>
+        </Grid>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Content="Save" Foreground="Black" Style="{StaticResource settingButtons}" Height="50" Width="200" Margin="0,0,90,100" Command="{Binding MainView.mainViewModel.NavigateHomeUICommand_}" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
+            <Button Content="Reset" Foreground="Black" Style="{StaticResource settingButtons}" Height="50" Width="200" Margin="0,0,90,100" Command="{Binding MainView.mainViewModel.ResetSettingServiceColors}" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
+            <Button Content="Cancel" Foreground="Black" Style="{StaticResource settingButtons}" Height="50" Width="200" Margin="0,0,90,100" Command="{Binding MainView.mainViewModel.NavigateHomeUICancelCommand_}" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
+            <Button Content="Default" Foreground="Black" Style="{StaticResource settingButtons}" Height="50" Width="200" Margin="0,0,0,100" Command="{Binding MainView.mainViewModel.ResetToDefaultColors}" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
+        </StackPanel>
+    </Grid>
+    </materialDesign:DialogHost>
+</UserControl>

@@ -1,0 +1,399 @@
+﻿<UserControl x:Class="ChessGame.Views.ChessMatch"
+         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+         xmlns:local="clr-namespace:ChessGame.Views"
+         xmlns:vm="clr-namespace:ChessGame.ViewModels"
+         xmlns:iconPack="http://metro.mahapps.com/winfx/xaml/iconpacks"
+         xmlns:ChessSquare="clr-namespace:ChessGame.Utilities"
+         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+	     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+         xmlns:converter="clr-namespace:ChessGame.Converters"
+         xmlns:hx="http://helix-toolkit.org/wpf/SharpDX"
+         xmlns:sys="clr-namespace:System;assembly=mscorlib"
+         mc:Ignorable="d"
+         MinWidth="1000" MinHeight="1000">
+
+    <!-- converter -->
+    <UserControl.Resources>
+        <converter:ConvertToString x:Key="converterString" />
+        <converter:ChessPlayerColorConverter x:Key="convertToPlayerColor" />
+    </UserControl.Resources>
+    <!-- main grid-->
+
+    <materialDesign:DialogHost CloseOnClickAway="False" Identifier="RootDialog" DialogBackground="Transparent" Margin="0,0,0,0">
+
+        <Grid>
+            <Grid.Background>
+            <ImageBrush ImageSource="/assets/displayElements/background3.jpg" Stretch="UniformToFill"/>
+        </Grid.Background>
+
+        <!-- sub menu -->
+        <Grid>
+            <Button x:Name="settingSubMenu" Height="40" Width="65" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Background="Transparent" Click="IsOpen_Click" ToolTip="Game Rules">
+                <Grid>
+                    <iconPack:PackIconMaterial Kind="Cog" Foreground="White" Width="30" Height="30" Background="Transparent"/>
+                </Grid>
+            </Button>
+        </Grid>
+
+        <!-- sub menu color indicator enable/disable -->
+        <Popup x:Name="PopUpSubMenu" StaysOpen="False" PlacementTarget="{Binding ElementName=settingSubMenu}" Placement="MousePoint"  PopupAnimation="Fade" Width="550" Height="205" ToolTip="Sub Menu">
+            <Border x:Name="PopUpSubMenuBorder" BorderThickness="2" BorderBrush="Black" Background="CadetBlue" CornerRadius="1" Padding="10">
+                <StackPanel>
+                    <TextBlock Text="Move Type Indicators" FontSize="22" Foreground="Black" FontWeight="Bold" HorizontalAlignment="Center"/>
+                    <StackPanel Orientation="Horizontal" Margin="0,15,0,0">
+                        <CheckBox IsChecked="{Binding AppSettingsService.Settings.IsEnableAvailableMovesIndicator}" Height="20" Width="20" HorizontalAlignment="Left" Margin="0,0,10,0" Style="{StaticResource CircleCheckboxFL}"/>
+                        <Label Content="Enable Available Moves Indicator" FontSize="15" FontStyle="Italic" FontFamily="Georgia"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                        <CheckBox IsChecked="{Binding AppSettingsService.Settings.IsEnableAttackMovesIndicator}" Height="20" Width="20" HorizontalAlignment="Left" Margin="0,0,10,0" Style="{StaticResource CircleCheckboxFL}"/>
+                        <Label Content="Enable Attack Moves Indicator" FontSize="15" FontStyle="Italic" FontFamily="Georgia"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                        <CheckBox IsChecked="{Binding AppSettingsService.Settings.IsEnableSpecialMoveIndicator}" Height="20" Width="20" HorizontalAlignment="Left" Margin="0,0,10,0" Style="{StaticResource CircleCheckboxFL}"/>
+                        <Label Content="Enable Special Move Indicator" FontSize="15" FontStyle="Italic" FontFamily="Georgia" Margin="0,6,0,0"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <CheckBox IsChecked="{Binding AppSettingsService.Settings.IsEnableCheckMateIndicator}" Height="20" Width="20" HorizontalAlignment="Left" Margin="0,0,10,0" Style="{StaticResource CircleCheckboxFL}"/>
+                        <Label Content="Enable Checkmate Indicator" FontSize="15" FontStyle="Italic" FontFamily="Georgia" Margin="0,6,0,0"/>
+                        <Button x:Name="closeButton" Height="40" Width="40"  HorizontalAlignment="Right" VerticalAlignment="Top" Click="CloseButton_Click"  Margin="250,0,0,0" ToolTip="Close" Style="{StaticResource buttonBook}">
+                            <Grid>
+                                <iconPack:PackIconMaterial Kind="Close" Foreground="WhiteSmoke" Width="30" Height="30"/>
+                            </Grid>
+                        </Button>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </Popup>
+
+
+        <Border BorderBrush="Black" Background="Black" BorderThickness="1" Grid.Column="2" HorizontalAlignment="Center" CornerRadius="10" Style="{StaticResource transparentBackground}" />
+
+
+        <!-- inner grid-->
+        <Grid Height="900" Width="1400" VerticalAlignment="Center" HorizontalAlignment="Center">
+
+            <!--- Layout left Column: (back button, games rules button)  
+                         Center Column: (chessboard, canvas, pawn promation selection)   
+                         Right Column: (game clock, player timer, home and restart button) -->
+
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="330"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto" />
+            </Grid.ColumnDefinitions>
+            
+            
+
+            <!-- ================================ left column ====================== -->
+
+                <StackPanel Orientation="Vertical" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,155">
+                    <!-- Game message board -->
+                    <ItemsControl x:Name="MessageBoard" ItemsSource="{Binding ChessGame.MovesQueue.BoardMovesQueue, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Height="300" Width="290" 
+                                   BorderBrush="Transparent" BorderThickness="10" Grid.Column="0" Margin="55,30,0,50">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding}" 
+                                        Foreground="{Binding PlayerColor, Converter={StaticResource convertToPlayerColor}}" 
+                                        FontSize="15"
+                                        Style="{StaticResource settingsFont}"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        TextWrapping="Wrap"
+                                        Margin="5,3"/>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                   
+                    <!-- Game Rules Pop up-->
+                    <Button x:Name="GameRules" Height="200" Width="200" Style="{StaticResource buttonBook}" Click="IsOpen_Click" ToolTip="Game Rules" Margin="70,0,0,50">
+                        <Grid>
+                            <iconPack:PackIconMaterial Kind="BookOutline" Foreground="White" Width="100" Height="130"/>
+                        </Grid>
+                    </Button>
+                    <Popup x:Name="PopUpGameRules" PlacementTarget="{Binding ElementName=ChessPieces}" Placement="Center" AllowsTransparency="True" StaysOpen="False" PopupAnimation="Fade" Width="700" Height="700">
+                    <Border x:Name="PopupBorder" BorderThickness="2" BorderBrush="Black" Background="CadetBlue" CornerRadius="1" Padding="10">
+                        <StackPanel Orientation="Vertical">
+                            <Button x:Name="CloseButton" Height="40" Width="40"  HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="CloseButton_Click" Style="{StaticResource buttonBook}" Margin="10,0,0,0" ToolTip="Close">
+                                <Grid>
+                                    <iconPack:PackIconMaterial Kind="Close" Foreground="WhiteSmoke" Width="30" Height="30"/>
+                                </Grid>
+                            </Button>
+                            <TextBlock Text="Game Piece Movement" FontSize="22" Foreground="Black" FontWeight="Bold" HorizontalAlignment="Center"/>
+                            <TextBlock TextWrapping="Wrap" FontSize="15">
+                                <LineBreak/>
+                                <Run Text="Pawn:" FontWeight="Bold"/>
+                                <Run Text="Moves one square forward, or two squares forward on its first move. Captures one square diagonally forward"/>
+                                <LineBreak/>
+                                <Run Text="Knight:" FontWeight="Bold"/>
+                                <Run Text="Moves in an L shape, two squares in one direction (horizontally or vertically) and then one square perpendicular"/>
+                                <LineBreak/>
+                                <Run Text="Bishop:" FontWeight="Bold"/>
+                                <Run Text="Moves any number of squares diagonally"/>
+                                <LineBreak/>
+                                <Run Text="Rook:" FontWeight="Bold"/>
+                                <Run Text="Moves any number of squares horizontally or vertically"/>
+                                <LineBreak/>
+                                <Run Text="Queen:" FontWeight="Bold"/>
+                                <Run Text="Moves any number of squares horizontally, vertically, or diagonally"/>
+                                <LineBreak/>
+                                <Run Text="King:" FontWeight="Bold"/>
+                                <Run Text="Moves one square in any direction as long as its move does not place itself in checkmate"/>
+                            </TextBlock>
+                            <TextBlock Text="Game Rules" FontSize="22" Foreground="Black" FontWeight="Bold" HorizontalAlignment="Center"/>
+                            <TextBlock TextWrapping="Wrap" FontSize="15">
+                                 <LineBreak/>
+                                 <Run Text="Capturing:" FontWeight="Bold"/>
+                                 <Run Text="A piece is captured when an opponet's piece moves to its square"/>
+                                 <LineBreak/>
+                                 <Run Text="Check:" FontWeight="Bold"/>
+                                 <Run Text="If a player's king is under attack, it's in check"/>
+                                 <LineBreak/>
+                                 <Run Text="Checkmate:" FontWeight="Bold"/>
+                                 <Run Text="If a king is in check and there are no legal moves to escape the attack, it's checkmate, and the game is over"/>
+                            </TextBlock>
+                            <TextBlock Text="Special Moves" FontSize="22" Foreground="Black" FontWeight="Bold" HorizontalAlignment="Center"/>
+                            <TextBlock TextWrapping="Wrap" FontSize="15">
+                                    <LineBreak/>
+                                    <Run Text="Castling:" FontWeight="Bold"/>
+                                    <Run Text="During the game the rook and king can switch chess square locations. However, this action can be performed given the following criteria"/>
+                                    <LineBreak/>
+                                    <Run Text="1. neither the king nor the rook has moved"/>
+                                    <LineBreak/>
+                                    <Run Text="2. No pieces between the king or rook"/>
+                                    <LineBreak/>
+                                    <Run Text="3. The king is not in check"/>
+                                    <LineBreak/>
+                                    <Run Text="4. The king does not pass through or land on an attack square"/>
+                                    <LineBreak/>
+                                    <LineBreak/>
+                                    <Run Text="Pawn Promotion:" FontWeight="Bold"/>
+                                    <Run Text="Occurs when a pawn reaches the opposite end of the board and can be exchanged for any other piece except a king"/>
+                                    <LineBreak/>
+                                    <LineBreak/>
+                                    <Run Text="En passant:" FontWeight="Bold"/>
+                                    <Run Text="Enables a pawn to capture an opponent's pawn that has just moved two squares forward, as if it has moved only one square"/>
+                            </TextBlock>
+                        </StackPanel>
+                    </Border>
+                </Popup>
+            </StackPanel>
+
+            <!-- back to game options -->
+            <StackPanel Orientation="Horizontal" Margin="40,0,0,50" VerticalAlignment="Bottom" HorizontalAlignment="Center">
+                <iconPack:PackIconMaterial Kind="KeyboardReturn" Height="70" Width="30" Foreground="White" />
+                <Button Content="Back" Style="{StaticResource circleButton}" Height="40" Width="150" Margin="15" Command="{Binding MainView.mainViewModel.NavigateGameOptionsCommand_}"/>
+            </StackPanel>
+
+
+                <Grid Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Grid.RowDefinitions>
+                        <!-- File labels -->
+                        <RowDefinition Height="20"/>
+
+                        <!-- Chess board -->
+                        <RowDefinition Height="700"/>
+
+                        <!-- Optional bottom labels -->
+                        <RowDefinition Height="20"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <!-- Rank labels -->
+                        <ColumnDefinition Width="20"/>
+
+                        <!-- Chess board -->
+                        <ColumnDefinition Width="700"/>
+
+                        <!-- Optional right labels -->
+                        <ColumnDefinition Width="20"/>
+                    </Grid.ColumnDefinitions>
+
+
+
+                    <!-- FILES: A B C D E F G H -->
+                    <ItemsControl Grid.Row="0" Grid.Column="1" ItemsSource="{Binding ChessGame.ChessBoard.Files}">
+
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <UniformGrid Columns="8"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Foreground="Silver" Text="{Binding}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+
+                    </ItemsControl>
+
+
+                    <!-- RANKS: 8 7 6 5 4 3 2 1 -->
+                    <ItemsControl Grid.Row="1" Grid.Column="0" ItemsSource="{Binding ChessGame.ChessBoard.Ranks}">
+
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <UniformGrid Rows="8"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Foreground="Silver" Text="{Binding}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+
+                    </ItemsControl>
+
+
+
+                    <!-- chess board  ===================================== center column =======================================-->
+                    <ItemsControl x:Name="ChessPieces" ItemsSource="{Binding ChessGame.ChessBoard.ChessSquares_, 
+                            UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                            Height="700" Width="700" BorderBrush="BlanchedAlmond" 
+                            BorderThickness="1" 
+                            Grid.Row="1" Grid.Column="1"
+                            RenderTransformOrigin="0.5, 0.5">
+
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <UniformGrid Columns="8" Rows="8"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <ChessSquare:ToggleChessSquare Style="{StaticResource toggleChessSquare}" Background="{Binding Color_, 
+                                        UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Command="{Binding ElementName=ChessPieces, Path=DataContext.MainView.mainViewModel.ExecuteMovePieceCommand, 
+                                        UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" CommandParameter="{Binding}">
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="Checked">
+                                                <!-- <i:InvokeCommandAction Command="{Binding ElementName=ChessPieces, Path=DataContext.MainView.mainViewModel.ExecuteGenerateAllAvailableMovesCommand, UpdateSourceTrigger=PropertyChanged}"/> -->
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
+                                        <Grid>
+                                            <Image Source="/assets/displayElements/wood_texture.jpg" Stretch="Fill" Opacity="0.20" IsHitTestVisible="False"/>
+                                            <Image Source="{Binding ChessPiece_.PieceImage, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Stretch="Uniform" Height="50" Width="50"/>
+                                        </Grid>
+                                    </ChessSquare:ToggleChessSquare>
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+
+
+                    <!-- pawn promotion selection -->
+                    <Border Background="CadetBlue" Visibility="{Binding ChessGame.GameControls.IsPawnSelectionGridVisible, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Height="120" 
+                            Width="400" CornerRadius="10" BorderBrush="Cyan" BorderThickness="2" Grid.Column="1" Grid.Row="1" >
+
+                        <ItemsControl x:Name="PawnPromotion" ItemsSource="{Binding ChessGame.GameControls.PawnPromotionChessPieces, 
+                            UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Background="CadetBlue" Grid.Column="1" HorizontalAlignment="Center" Width="380">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <UniformGrid Columns="4" Rows="1"/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Button Height="70" Width="70"  Margin="0,0,0,0" Style="{StaticResource circleButton}" Command="{Binding ElementName=PawnPromotion,
+                                        Path=DataContext.MainView.mainViewModel.ExecutePawnPromotionCommand, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" CommandParameter="{Binding}">
+                                        <Image Source="{Binding PieceImage}" Stretch="Uniform" Height="50" Width="50"/>
+                                    </Button>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </Border>
+                    <!-- animation for chess pieces -->
+                    <Canvas x:Name="AnimationCanvas" IsHitTestVisible="False" Width="700" Height="700" Background="Transparent" Panel.ZIndex="1000" Grid.Column="1">
+                        <Image x:Name="name"
+                       Width="50" Height="50">
+                            <Image.RenderTransform>
+                                <TranslateTransform x:Name="ImageTransform"/>
+                            </Image.RenderTransform>
+                        </Image>
+                    </Canvas>
+                </Grid>
+                <!-- =================================================== right column ========================================= -->
+            <Grid Height="900" Width="270" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,30,0,0">
+                <StackPanel Orientation="Vertical">
+                    <!-- Game Clock -->
+                    <TextBlock Text="Game Clock" Visibility="{Binding ClockVisibility}" FontFamily="Georgia" FontStyle="Italic" 
+                               VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="22" Foreground="White" Margin="20,0,10,0"/>
+                    <Grid Visibility="{Binding ClockVisibility}" VerticalAlignment="Top" HorizontalAlignment="Center" Height="40" Width="200" Margin="20,10,10,0">
+                        <Border BorderBrush="White" BorderThickness="2" CornerRadius="5">
+                            <Label x:Name="gameClock" Content="{Binding GameClock_}" FontFamily="Georgia" FontStyle="Italic" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="22" Foreground="White"/>
+                        </Border>
+                    </Grid>
+
+                    <!-- chess pieces that have been removed from the board opponetChessPieces-->
+                        <ItemsControl ItemsSource="{Binding ChessGame.ChessBoard.RemovedOpponentChessPieces, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                                  Height="80" Width="250" HorizontalAlignment="Center" Margin="0,40,0,0">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <UniformGrid Columns="8" Rows="2"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border Background="Transparent" Margin="1,0,0,0">
+                                    <Image Source="{Binding}" Stretch="Uniform" Height="35" Width="30" Margin="0,0,0,0"/>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+
+                    <!-- chess pieces that have been removed from the board playerChessPieces-->
+                    <ItemsControl ItemsSource="{Binding ChessGame.ChessBoard.RemovedPlayerChessPieces, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                                  Height="80" Width="250" HorizontalAlignment="Center" Margin="0,40,0,0">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <UniformGrid Columns="8" Rows="2"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border Background="Transparent" Margin="1,0,0,0">
+                                    <Image Source="{Binding}" Stretch="Uniform" Height="35" Width="30" Margin="0,0,0,0"/>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+
+                    <!-- player clock -->
+                    <TextBlock Text="Player Clock" Visibility="{Binding ClockVisibility}" FontFamily="Georgia" FontStyle="Italic" VerticalAlignment="Center" 
+                               HorizontalAlignment="Center"  FontSize="22" Foreground="White" Margin="0,50,0,0"/>
+                    <Grid Visibility="{Binding ClockVisibility}" VerticalAlignment="Bottom" HorizontalAlignment="Center" Height="200" Width="200" Margin="20,0,10,0">
+                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                            <Border BorderBrush="White" BorderThickness="2" CornerRadius="5">
+                                <Label x:Name="playerClock" Content="{Binding PlayerMoveClock}" FontFamily="Georgia" FontStyle="Italic" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="22" Foreground="White"/>
+                            </Border>
+                            <Button x:Name="gameControl" Content="{Binding ClockButtonContent}" Visibility="{Binding ClockVisibility}" Height="40" Width="200" Style="{StaticResource circleButton}" Margin="0,20,0,0" Command="{Binding MainView.mainViewModel.PauseGameCommand}" CommandParameter="{Binding ButtonCommandParam, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <!-- right panel buttons -->
+                    <StackPanel Orientation="Horizontal" Margin="0,80,0,0" HorizontalAlignment="Center">
+                        <iconPack:PackIconMaterial Kind="Home" Height="70" Width="40" Foreground="White" />
+                        <Button Content="Home" Style="{StaticResource circleButton}" Height="40" Width="150" Margin="15" 
+                                Command="{Binding MainView.mainViewModel.NavigateHomeFromBoardCommand}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,10,0,0" HorizontalAlignment="Center">
+                        <iconPack:PackIconMaterial Kind="Handshake" Height="70" Width="40" Foreground="White" />
+                        <Button Content="Resign" Style="{StaticResource circleButton}" Height="40" Width="150" Margin="15" 
+                                Command="{Binding MainView.mainViewModel.ResignCommand}"/>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </Grid>
+    </materialDesign:DialogHost>
+</UserControl>

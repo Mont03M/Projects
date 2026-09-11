@@ -1,0 +1,17 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:vm="clr-namespace:ChessGame.ViewModels"
+                    xmlns:view="clr-namespace:ChessGame.Views">
+    <DataTemplate DataType="{x:Type vm:MainChessGameUI_VM}">
+        <view:MainChessGameUI/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:GameOptionsVM}">
+        <view:GameOptions/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:ChessMatchVM}">
+        <view:ChessMatch/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:SettingsVM}">
+        <view:Settings/>
+    </DataTemplate>
+</ResourceDictionary>

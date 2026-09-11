@@ -1,0 +1,274 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net9.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <ApplicationIcon>Assets\knight.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="assets\displayElements\ai_vs_ai.jpg" />
+    <None Remove="assets\dispalyElements\background.jpg" />
+    <None Remove="assets\displayElements\background3.jpg" />
+    <None Remove="assets\displayElements\background4.jpg" />
+    <None Remove="assets\displayElements\background5.jpg" />
+    <None Remove="assets\displayElements\background6.jpg" />
+    <None Remove="assets\displayElements\background_2.jpg" />
+    <None Remove="assets\displayElements\ChessPieces.jpg" />
+    <None Remove="assets\displayElements\chessPieces2.jpg" />
+    <None Remove="assets\displayElements\chessPieces3.jpg" />
+    <None Remove="assets\displayElements\chessPieces_black.jpg" />
+    <None Remove="assets\displayElements\clock.jpg" />
+    <None Remove="assets\displayElements\knight.jpg" />
+    <None Remove="assets\displayElements\pawn.jpg" />
+    <None Remove="assets\displayElements\player_npc.jpg" />
+    <None Remove="assets\displayElements\player_vs_ai.jpg" />
+    <None Remove="assets\displayElements\queen.jpg" />
+    <None Remove="assets\displayElements\wood_texture.jpg" />
+    <None Remove="assets\chessPieceSets\chessPiecesSet2\bishop_black.png" />
+    <None Remove="assets\chessPieceSets\chessPiecesSet2\bishop_white.png" />
+    <None Remove="assets\chessPieceSets\chessPiecesSet2\king_black.png" />
+    <None Remove="assets\chessPieceSets\chessPiecesSet2\king_white.png" />
+    <None Remove="assets\chessPieceSets\chessPiecesSet2\knight_black.png" />
+    <None Remove="assets\chessPieceSets\chessPiecesSet2\knight_white.png" />
+    <None Remove="assets\chessPieceSets\chessPiecesSet2\pawn_black.png" />
+    <None Remove="assets\chessPieceSets\chessPiecesSet2\pawn_white.png" />
+    <None Remove="assets\chessPieceSets\chessPiecesSet2\queen_black.png" />
+    <None Remove="assets\chessPieceSets\chessPiecesSet2\queen_white.png" />
+    <None Remove="assets\chessPieceSets\chessPiecesSet2\rook_black.png" />
+    <None Remove="assets\chessPieceSets\chessPiecesSet2\rook_white.png" />
+    <None Remove="assets\chessPieceSets\chessPiecesSet1\bishop_black.png" />
+    <None Remove="assets\chessPieceSets\chessPiecesSet1\bishop_white.png" />
+    <None Remove="assets\chessPieceSets\chessPiecesSet1\king_black.png" />
+    <None Remove="assets\chessPieceSets\chessPiecesSet1\king_white.png" />
+    <None Remove="assets\chessPieceSets\chessPiecesSet1\pawn_black.png" />
+    <None Remove="assets\chessPieceSets\chessPiecesSet1\pawn_white.png" />
+    <None Remove="assets\chessPieceSets\chessPiecesSet1\queen_black.png" />
+    <None Remove="assets\chessPieceSets\chessPiecesSet1\queen_White.png" />
+    <None Remove="assets\chessPieceSets\chessPiecesSet3\bishop_black.png" />
+    <None Remove="assets\chessPieceSets\chessPiecesSet3\bishop_white.png" />
+    <None Remove="assets\chessPieceSets\chessPiecesSet3\king_black.png" />
+    <None Remove="assets\chessPieceSets\chessPiecesSet3\king_white.png" />
+    <None Remove="assets\chessPieceSets\chessPiecesSet3\knight_black.png" />
+    <None Remove="assets\chessPieceSets\chessPiecesSet3\knight_white.png" />
+    <None Remove="assets\chessPieceSets\chessPiecesSet3\pawn_black.png" />
+    <None Remove="assets\chessPieceSets\chessPiecesSet3\pawn_white.png" />
+    <None Remove="assets\chessPieceSets\chessPiecesSet3\queen_black.png" />
+    <None Remove="assets\chessPieceSets\chessPiecesSet3\queen_white.png" />
+    <None Remove="assets\chessPieceSets\chessPiecesSet3\rook_black.png" />
+    <None Remove="assets\chessPieceSets\chessPiecesSet3\rook_white.png" />
+    <None Remove="assets\chessSounds\chess_checkmate.wav" />
+    <None Remove="assets\chessSounds\chess_intro_sound.wav" />
+    <None Remove="assets\chessSounds\chess_match_start.wav" />
+    <None Remove="assets\chessSounds\chess_piece_capture.wav" />
+    <None Remove="assets\chessSounds\chess_piece_move.wav" />
+    <None Remove="assets\chessSounds\navigation_sound.wav" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="assets\knight.ico" />
+    <Resource Include="assets\displayElements\wood_texture.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Content Include="assets\chessSounds\chess_match_start.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assets\chessSounds\chess_piece_capture.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assets\chessSounds\chess_piece_move.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assets\chessSounds\navigation_sound.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="assets\displayElements\background3.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="assets\displayElements\background4.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="assets\displayElements\background5.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="assets\displayElements\background6.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="assets\displayElements\ChessPieces.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="assets\displayElements\chessPieces2.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="assets\displayElements\chessPieces3.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="assets\displayElements\chessPieces_white.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="assets\displayElements\chessPieces_black.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="assets\displayElements\clock.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="assets\chessPieceSets\chessPiecesSet2\bishop_black.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="assets\chessPieceSets\chessPiecesSet2\bishop_white.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="assets\chessPieceSets\chessPiecesSet2\king_black.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="assets\chessPieceSets\chessPiecesSet2\king_white.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="assets\chessPieceSets\chessPiecesSet2\knight_black.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="assets\chessPieceSets\chessPiecesSet2\knight_white.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="assets\chessPieceSets\chessPiecesSet2\pawn_black.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="assets\chessPieceSets\chessPiecesSet2\pawn_white.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="assets\chessPieceSets\chessPiecesSet2\queen_black.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="assets\chessPieceSets\chessPiecesSet2\queen_white.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="assets\chessPieceSets\chessPiecesSet2\rook_black.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="assets\chessPieceSets\chessPiecesSet2\rook_white.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="assets\chessPieceSets\chessPiecesSet1\rook_black.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MahApps.Metro.IconPacks.Material" Version="5.1.0" />
+    <PackageReference Include="MaterialDesignColors" Version="5.3.2" />
+    <PackageReference Include="MaterialDesignThemes" Version="5.3.2" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.6" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.6" />
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.135" />
+    <PackageReference Include="System.Collections" Version="4.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="assets\displayElements\ai_vs_ai.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="assets\displayElements\background.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="assets\displayElements\background_2.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="assets\displayElements\knight.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="assets\displayElements\pawn.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="assets\displayElements\player_npc.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="assets\displayElements\player_vs_ai.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="assets\displayElements\queen.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="assets\chessPieceSets\chessPiecesSet1\bishop_black.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="assets\chessPieceSets\chessPiecesSet1\bishop_white.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="assets\chessPieceSets\chessPiecesSet1\rook_white.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="assets\chessPieceSets\chessPiecesSet1\knight_black.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="assets\chessPieceSets\chessPiecesSet1\knight_white.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="assets\chessPieceSets\chessPiecesSet1\king_black.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="assets\chessPieceSets\chessPiecesSet1\king_white.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="assets\chessPieceSets\chessPiecesSet1\pawn_black.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="assets\chessPieceSets\chessPiecesSet1\pawn_white.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="assets\chessPieceSets\chessPiecesSet1\queen_black.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="assets\chessPieceSets\chessPiecesSet1\queen_White.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="assets\chessPieceSets\chessPiecesSet3\bishop_black.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="assets\chessPieceSets\chessPiecesSet3\bishop_white.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="assets\chessPieceSets\chessPiecesSet3\king_black.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="assets\chessPieceSets\chessPiecesSet3\king_white.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="assets\chessPieceSets\chessPiecesSet3\knight_black.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="assets\chessPieceSets\chessPiecesSet3\knight_white.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="assets\chessPieceSets\chessPiecesSet3\pawn_black.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="assets\chessPieceSets\chessPiecesSet3\pawn_white.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="assets\chessPieceSets\chessPiecesSet3\queen_black.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="assets\chessPieceSets\chessPiecesSet3\queen_white.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="assets\chessPieceSets\chessPiecesSet3\rook_black.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="assets\chessPieceSets\chessPiecesSet3\rook_white.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Content Include="assets\chessSounds\chess_checkmate.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assets\chessSounds\chess_intro_sound.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+</Project>

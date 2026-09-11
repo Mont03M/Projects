@@ -1,0 +1,85 @@
+{
+  "squareOdd": {
+    "ColorContext": null,
+    "A": 255,
+    "R": 0,
+    "G": 0,
+    "B": 0,
+    "ScA": 1,
+    "ScR": 0,
+    "ScG": 0,
+    "ScB": 0
+  },
+  "squareEven": {
+    "ColorContext": null,
+    "A": 255,
+    "R": 255,
+    "G": 255,
+    "B": 255,
+    "ScA": 1,
+    "ScR": 1,
+    "ScG": 1,
+    "ScB": 1
+  },
+  "choosenChessSetSelection": "set1",
+  "availableMovesIndicator": {
+    "ColorContext": null,
+    "A": 255,
+    "R": 0,
+    "G": 255,
+    "B": 255,
+    "ScA": 1,
+    "ScR": 0,
+    "ScG": 1,
+    "ScB": 1
+  },
+  "attackMovesIndicator": {
+    "ColorContext": null,
+    "A": 255,
+    "R": 139,
+    "G": 0,
+    "B": 0,
+    "ScA": 1,
+    "ScR": 0.25818288,
+    "ScG": 0,
+    "ScB": 0
+  },
+  "checkMateIndicator": {
+    "ColorContext": null,
+    "A": 255,
+    "R": 218,
+    "G": 165,
+    "B": 32,
+    "ScA": 1,
+    "ScR": 0.7011019,
+    "ScG": 0.37626216,
+    "ScB": 0.014443845
+  },
+  "specialMoveIndicator": {
+    "ColorContext": null,
+    "A": 255,
+    "R": 0,
+    "G": 128,
+    "B": 0,
+    "ScA": 1,
+    "ScR": 0,
+    "ScG": 0.21586053,
+    "ScB": 0
+  },
+  "RankFileColor": {
+    "ColorContext": null,
+    "A": 255,
+    "R": 192,
+    "G": 192,
+    "B": 192,
+    "ScA": 1,
+    "ScR": 0.52711517,
+    "ScG": 0.52711517,
+    "ScB": 0.52711517
+  },
+  "IsEnableAvailableMovesIndicator": true,
+  "IsEnableAttackMovesIndicator": true,
+  "IsEnableCheckMateIndicator": true,
+  "IsEnableSpecialMoveIndicator": true,
+  "IsEnableSoundEffects": true
+}
