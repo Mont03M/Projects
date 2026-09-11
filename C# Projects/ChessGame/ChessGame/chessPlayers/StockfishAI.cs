@@ -55,18 +55,6 @@ namespace ChessGame.ChessPlayers
 
         #endregion
 
-        /*
-       public List<string> testMoves = new()
-       {
-           {"h6g6" },
-           {"g6h5" },
-           {"h3h2" },
-           {"h5h4" },
-           {"h4g5" },
-           {"g3c7" }
-       };
-       */
-
         #region -- Stockfish Move Method --
 
         /// <summary>
@@ -131,23 +119,7 @@ namespace ChessGame.ChessPlayers
                     squares = SelectedSquaresWithPromotionChessPiece(result, playerColor, chessBoard); // promotion checks
                 else
                     squares = SelectedSquares(result, chessBoard); // selected chess squares (file and rank coordinates)
-                
-                /*
-                
-                var bestMove = testMoves.FirstOrDefault();
-                testMoves.Remove(bestMove);
-
-
-                (ChessSquare? fromSquare, ChessSquare? toSquare, ChessPiece? promotionChessPiece) squares;
-
-                if (bestMove.Length == 5)
-                    squares = SelectedSquaresWithPromotionChessPiece(new StockfishSearchResult(bestMove, 0), playerColor, chessBoard);
-                else
-                    squares = SelectedSquares(new StockfishSearchResult(bestMove, 0), chessBoard);
-                
-                
-                */
-
+        
                 ArgumentNullException.ThrowIfNull(squares.fromSquare);
                 ArgumentNullException.ThrowIfNull(squares.toSquare);
 
@@ -162,25 +134,6 @@ namespace ChessGame.ChessPlayers
                 // stores the move type of the best move selected
                 MoveType moveType = MoveType.NORMAL;
 
-
-                /*
-                Debug.WriteLine(
-                    $"Stockfish best move: {result.BestMove}, " +
-                    $"mapped from {squares.fromSquare?.boardLocation} " +
-                    $"to {squares.toSquare?.boardLocation}");
-                
-
-                Debug.WriteLine(
-                    $"From piece: {squares.fromSquare?.ChessPiece_?.GetType().Name}, " +
-                    $"color: {squares.fromSquare?.ChessPiece_?.PieceColor}");
-
-                Debug.WriteLine(
-                    $"To square occupied: {squares.toSquare?.ChessPiece_ != null}");
-                */
-
-
-
-
                 // check the selected move is valid 
                 // Ensures chess board moves are valid and preserves the chess board states.
                 bool isValid = PlayerControls.IsPlayerAvailableMove(movingChessPiece, squares.toSquare, out MovesAvailable? typeOfMove) ||
@@ -189,23 +142,6 @@ namespace ChessGame.ChessPlayers
 
                 if (!isValid)
                 {
-                    /*
-                    Debug.WriteLine($"best move: {result.BestMove}");
-                    Debug.WriteLine($"Stockfish best move: {result.BestMove}, mapped from {squares.fromSquare?.boardLocation} to {squares.toSquare?.boardLocation}");
-                    Debug.WriteLine($"From piece: {squares.fromSquare?.ChessPiece_?.GetType().Name} color {squares.fromSquare?.ChessPiece_?.PieceColor}");
-                    Debug.WriteLine($"To square occupied: {squares.toSquare?.ChessPiece_ != null} {squares.toSquare?.ChessPiece_?.PieceType} {squares.toSquare?.ChessPiece_?.PieceColor}");
-
-
-                    Debug.WriteLine($"Pinned?: {squares.fromSquare?.ChessPiece_.IsPinned}");
-
-                    var fromPieceType = squares.fromSquare?.ChessPiece_ as IChessMoves;
-
-                    foreach(var m in fromPieceType?.AvailableMoves?? [])
-                    {
-                        Debug.WriteLine($"Available move: {m.Move} type: {m.MoveType} pieceType: {m.PieceType}");   
-                    }
-                    */
-
                     throw new Exception("not valid!!!!");
                 }
 
@@ -363,7 +299,6 @@ namespace ChessGame.ChessPlayers
         /// <returns>A tuple containing the from square, to square, and the chess piece involved in the move.</returns>
         public (ChessSquare? fromSquare, ChessSquare? toSquare, ChessPiece? chessPiece) SelectedSquares(StockfishSearchResult result, Board chessBoard)
         {
-
             string bestMove = string.Empty;
 
             // gets the correct castling locations defined by the chess board's coordinate planes
