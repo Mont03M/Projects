@@ -1218,19 +1218,13 @@ namespace ChessGame.Game
             if (isPause)
             {
                 ChessGameService.IsGamePause = false;
-                PlayerTurnPause.TrySetResult();
-
-                Debug.WriteLine($"In if stmt Restartgame loop {PlayerTurnPause.ToString()}");
+                //PlayerTurnPause.TrySetResult();
             }
-
-            Debug.WriteLine($"In after if stmt Restartgame loop {PlayerTurnPause.ToString()} Game is pause: {ChessGameService.IsGamePause}");
 
             // stop any ongoing game processes with a timeout of 1 second
             await StopGameProcessesAsync(TimeSpan.FromSeconds(1));
             CancellationTokenSource = new CancellationTokenSource();
             StartGameProcesses();
-
-            Debug.WriteLine($"after string game processes after starting processes Game is pause: {ChessGameService.IsGamePause}");
         }
 
         /// <summary>

@@ -157,7 +157,7 @@ namespace ChessGame.ViewModels
             else
             {
                 IsInPauseMode();
-                await ChessGame.RestartGameLoop();
+                await ChessGame.RestartGameLoop((ChessGameService.selectedGameMode != null && ChessGameService.selectedGameMode.Equals("AI-AI")) ? true : false);
             }
         }
 
@@ -188,7 +188,7 @@ namespace ChessGame.ViewModels
             else
             {
                 IsInPauseMode();
-                await ChessGame.RestartGameLoop();
+                await ChessGame.RestartGameLoop((ChessGameService.selectedGameMode != null && ChessGameService.selectedGameMode.Equals("AI-AI")) ? true : false);
             }
         }
 
@@ -257,7 +257,7 @@ namespace ChessGame.ViewModels
             else
             {
                 IsInPauseMode();
-                await ChessGame.RestartGameLoop();
+                await ChessGame.RestartGameLoop((ChessGameService.selectedGameMode != null && ChessGameService.selectedGameMode.Equals("AI-AI")) ? true : false);
             }
         }
 
@@ -445,10 +445,7 @@ namespace ChessGame.ViewModels
             else
             {
                 IsInPauseMode();
-
-                //ChessGameService.IsGamePause = false;
-
-                await ChessGame.RestartGameLoop();
+                await ChessGame.RestartGameLoop((ChessGameService.selectedGameMode != null && ChessGameService.selectedGameMode.Equals("AI-AI")) ? true : false);
             }
         }
         
@@ -457,11 +454,8 @@ namespace ChessGame.ViewModels
         /// </summary>
         public void IsInPauseMode()
         {
-            Debug.WriteLine($"Game pause: {ButtonCommandParam}");
-
             if (!string.IsNullOrWhiteSpace(ButtonCommandParam) && bool.Parse(ButtonCommandParam) != false)
             {
-                Debug.WriteLine("game is not pause");
                 ChessGameService.IsGamePause = false;
                 StartUpTimers();
             }
