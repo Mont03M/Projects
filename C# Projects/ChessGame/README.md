@@ -255,6 +255,52 @@ The application also includes supporting resources for a complete playable chess
 
 The architecture is designed to keep **the WPF user interface, chess rules, game-state management, asynchronous processing, special-move handling, and AI logic separated from one another**. This separation makes the application easier to maintain, test, debug, and extend with additional features, game modes, AI strategies, and user interface improvements.<br>
 
+## Application Screenshoots
+
+### Main UI
+
+![Main UI](docs/images/home_UI.png)
+
+### Game Options UI
+
+![Game Options UI](docs/images/game_options_UI.png)
+
+### Setting UI
+
+![Settings UI](docs/images/settings_UI.png)
+
+### Chess Game UI Dialog Message
+
+![Chess Game UI Dialog Message](docs/images/dialog_message.png)
+
+### Move Generation
+
+![Move Generation](docs/images/move_generation.png)
+
+### Check Monitoring
+
+![Check Monitoring](docs/images/check_detection.png)
+
+### Checkmate Monitoring
+
+![Checkmate Monitoring](docs/images/checkmate_detection.png)
+
+### Castling Monitoring
+
+![Castling Monitoring](docs/images/castling_detection.png)
+
+### Pawn Promotion
+
+![Pawn Promotion](docs/images/pawn_promotion_detection.png)
+
+### Lighting Chess Game Mode
+
+![Lighting Chess Game Mode](docs/images/lightingChess_game_mode.png)
+
+### Settings UI Dialog Message
+
+![Settings UI Dialog Message](docs/images/Settings_UI_with_dialogBox.png)
+
 ## Stockfish
 
 This application uses the Stockfish chess engine, which is licensed under the GNU General Public License version 3 (GPLv3).<br>
