@@ -300,9 +300,15 @@ namespace ChessGame.ChessPlayers
         public (ChessSquare? fromSquare, ChessSquare? toSquare, ChessPiece? chessPiece) SelectedSquares(StockfishSearchResult result, Board chessBoard)
         {
             string bestMove = string.Empty;
+            
+            // casting move is only valid if selected by the king chess piece for a stockfish player
+            var checkSquare = chessBoard?.ChessSquares_?.FirstOrDefault(get => get.ChessBoardLocation.Equals(result.BestMove[..2]));
 
             // gets the correct castling locations defined by the chess board's coordinate planes
-            if (castlingLocations.TryGetValue(result.BestMove, out var bestMoveIsCastlingMove))
+            if (checkSquare != null && 
+                checkSquare.ChessPiece_ != null && 
+                checkSquare.ChessPiece_.PieceType == PieceType.KING &&
+                castlingLocations.TryGetValue(result.BestMove, out var bestMoveIsCastlingMove))
                 bestMove = bestMoveIsCastlingMove;
             else
                 bestMove = result.BestMove;
